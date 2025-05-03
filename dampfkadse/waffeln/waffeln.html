@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waffelrechner</title>
+
+    <style>
+        label {
+            font-weight: bold;
+            color: blanchedalmond;
+        }
+
+        a {
+            color:burlywood;
+        }
+
+        p {
+            font-weight: bold;
+            color: blanchedalmond;
+        }
+    </style>
+
+    <script>
+
+        function getUrlParameter(par) {
+
+            var value = '';
+            var UrlParameter = window.location.search;
+
+            if (UrlParameter != "") {
+                var i = UrlParameter.indexOf(par + "=");
+                if (i >= 0) {
+                    i = i + par.length + 1;
+                    var k = UrlParameter.indexOf("&", i);
+                    if (k < 0) {
+                        k = UrlParameter.length;
+                    }
+                    value = UrlParameter.substring(i, k);
+                    for (i = 0; i < value.length; i++) {
+                        if (value.charAt(i) == '+') {
+                            value = value.substring(0, i) + " " + value.substring(i + 1, value.length);
+                        }
+                    }
+                    value = unescape(value);
+                }
+            }
+            return value;
+        }
+
+        function init() {
+
+            var wvol = getUrlParameter("wvol");
+            document.winput.wvol.value = wvol;
+
+            var wnum = getUrlParameter("wnum");
+            document.winput.wnum.value = wnum;
+
+            if (wvol >= 1 && wnum >= 1) {
+
+                wcalc();
+            }
+
+
+        }
+
+    </script>
+
+</head>
+
+<body onload="init()" style="background-image:url(images/waffeln.jpeg)">
+    <center>
+        <table border=1 style="background: white;">
+            <tr>
+                <td><a href="../index.html">Startseite</a></td>
+                <td><a href="../uebermich/ueber.html">&Uuml;ber mich</a></td>
+                <td><a href="../Bastelkram/bastelkram.html">Bastelkram</a></td>
+                <td><a href="../artwork/artwork.html">Artwork</a></td>
+                <td><a href="../8205/8205.html">8205</a></td>
+                <td><a href="../waffeln/waffeln.html">Waffelcalculator</a></td>
+
+            </tr>
+        </table>
+    </center>
+    <br>
+    <br>
+    <center>
+
+        <p>Bei den meisten handels&uuml;blichen Waffeleisen entspricht eine Waffel 150ml Teig.</p>
+
+    </center>
+    <center>
+        <form name="winput">
+            <label for="wvol">
+                Waffelvolumen: <br>
+                <input oninput="wcalc()" type="number" name="wvol" id="wvol" value="150">
+                ml
+            </label> <br><br>
+            <label for="wnum">
+                Anzahl der Waffeln: <br>
+                <input oninput="wcalc()" type="number" name="wnum" id="wnum">
+                Stk
+            </label>
+            <br><br>
+
+        </form>
+    </center>
+    <script>
+
+
+        function wcalc() {
+            const teigdichte = 1.14;
+            var wvol = document.winput.wvol.value;
+            var wnum = document.winput.wnum.value;
+            var teigvol = wvol * wnum;
+            var geier = 1000; //alle mengen in gramm
+            var gzucker = 1000;
+            var gbutter = 1250;
+            var gVzucker = 100;
+            var gBpulver = 50;
+            var gmilch = 1032;
+            var gmehl = 2000;
+            var gmate = 1040;
+            var grum = 237.5;
+            var gsalz = 20;
+
+            var GewichtGrundrezept = geier + gzucker + gbutter + gVzucker + gBpulver + gmilch + gmehl + gmate + grum + gsalz;
+            var teiggew = Math.round(teigvol * teigdichte);
+            var teigfraction = teiggew / GewichtGrundrezept;
+
+            var eier = Math.round(geier * teigfraction);
+            var eizahl = Math.round(eier / 50); //anzahl eier bei 50g/Ei
+            var zucker = Math.round(gzucker * teigfraction);
+            var butter = Math.round(gbutter * teigfraction);
+            var Vzucker = Math.round(gVzucker * teigfraction);
+            var Bpulver = Math.round(gBpulver * teigfraction);
+            var milch = Math.round(gmilch * teigfraction);
+            var mehl = Math.round(gmehl * teigfraction);
+            var mate = Math.round(gmate * teigfraction);
+            var rum = Math.round(grum * teigfraction);
+            var salz = Math.round(gsalz * teigfraction);
+
+            document.getElementById('result').innerHTML = "Teig pro Waffel:" + wvol + "ml" + '<br>' + "Anzahl der Waffeln:" + wnum + "Stk" + '<br>' + "Gesamtvolumen: <br>" + teigvol + "ml" + " umgerechnet ca. " + teiggew + "g" + '<br>' + "<b>ben&ouml;tigte Zutaten:</b>" + '<br>' + "Eier: " + eier + "g" + " das entspricht ca." + eizahl + " Eiern" + '<br>' + "Zucker: " + zucker + "g" + "<br>" + "Butter: " + butter + "g" + "<br>" + "Vanillezucker: " + Vzucker + "g" + "<br>" + "Backpulver: " + Bpulver + "g" + "<br>" + "Milch: " + milch + "ml" + "<br>" + "Mehl: " + mehl + "g" + "<br>" + "Mate: " + mate + "ml" + "<br>" + "Rum: " + rum + "ml" + "<br>" + "Salz: " + salz + "g" + "<br>" + wnum + " Impfdosen Covid-19 Impfstoff";
+            var link = "https://dampfkadse.de/waffeln/waffeln.html?wvol=" + wvol + "&wnum=" + wnum;
+            document.getElementById('link').innerHTML = "Link zum Teilen:<br>" + "<a href=" + link + ">" + link + "</a>";
+        }
+
+    </script>
+    <center>
+        <p id="link"></p>
+        <p id="result"></p>
+        <a href=""></a>
+    </center>
+
+</body>
+
+</html>

@@ -1,14 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLACEHOLDER</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Dampfkadse</title>
 </head>
 <body>
-<center>
-    <h1>Placeholder</h1>
-    <h2>hier entsteht eine Webseite</h2>
-</center>
+
+    <center><h1>Hier entsteht eine Webpräsenz</h1>
+    <button id="zammad-feedback-form">Contact</button>
+
+<script id="zammad_form_script" src="https://hilfetisch.dampfkadse.de/assets/form/form.js"></script>
+
+<script>
+$(function() {
+  $('#zammad-feedback-form').ZammadForm({
+    messageTitle: 'Contact',
+    messageSubmit: 'Submit',
+    messageThankYou: 'Thank you for your inquiry (#%s)! We\'ll contact you as soon as possible.',
+    showTitle: true,
+    modal: true,
+    attachmentSupport: true
+  });
+});
+</script>
+    </center><br>
+<a rel="me" href="https://chaos.social/@S73AMPUNKCA7">Mastodon</a>
 </body>
 </html>

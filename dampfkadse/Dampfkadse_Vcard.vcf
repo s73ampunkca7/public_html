@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N;CHARSET=UTF-8:Strehl;Mika;;;Dampfkadse
+FN;CHARSET=UTF-8: Mika Strehl
+URL;PRIVATE:https://dampfkadse.de
+EMAIL;type=HOME;type=PREF:0xMika@dampfkadse.de
+TEL;type=CELL;VOICE:3621
+TEL;type=CELL;MOBILE:017612176000
+REV:2024-12-09T09:20:32+01:00
+END:VCARD
